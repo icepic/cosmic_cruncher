@@ -197,7 +197,7 @@ def ParseLine():
         return
 
     if dec.Asm.Cond_False == 0:
-        # Conditional assembly is ture. Have to assemble this line
+        # Conditional assembly is true. Have to assemble this line
 
         # Select memory mode
         # May have changed by previous line
@@ -229,7 +229,7 @@ def ParseLine():
             IncParsePointer()
         if NowChar() != " ":
             errors.DoError('illlabel', False)
-            return              # Dont' bother to continue
+            return              # Don't bother to continue
         dec.Asm.New_Label = newlabel
         if len(newlabel) > 0:
             # Do a boundary sync if a label is given
@@ -821,14 +821,14 @@ def Calculate(val1, val2, operator):
     elif operator == '<<':
         # Shift left
         if dec.Asm.Pass == 2 and (value2 < 0 or value2 > 31):
-            # Check valid rane in pass 2 because of forward referenced labels
+            # Check valid range in pass 2 because of forward referenced labels
             errors.DoError('range',false)
             value2 = 0
         result = value1 << value2
     elif operator == '>>':
         # Shift right
         if not val2[1] and (value2 < 0 or value2 > 63):
-            # Check valid rane in pass 2 because of forward referenced labels
+            # Check valid range in pass 2 because of forward referenced labels
             errors.DoError('range',false)
             value2 = 0
         result = value1 >> value2
